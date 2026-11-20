@@ -1,0 +1,17 @@
+name: Re-run red main once
+on:
+  workflow_run:
+    workflows: [ci]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+  checks: read
+jobs:
+  rerun:
+    uses: ourostack/.github/.github/workflows/auto-revert-reusable.yml@main
+    with:
+      rerun-only: true
